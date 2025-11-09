@@ -1,0 +1,22 @@
+
+*** a/src/App.js
+--- b/src/App.js
+@@
++import SubscriptionsPage from './pages/SubscriptionsPage';
++import InvoicesListPage from './pages/InvoicesListPage';
++import InvoiceViewerPage from './pages/InvoiceViewerPage';
++import ProgramsBrowsePage from './pages/ProgramsBrowsePage';
++import ProgramDetailPage from './pages/ProgramDetailPage';
++import TrainersRegisterPage from './pages/TrainersRegisterPage';
++import UserProfilePage from './pages/UserProfilePage';
+@@
+         <Routes>
++          <Route path="/subscriptions" element={<SubscriptionsPage/>} />
++          <Route path="/invoices" element={<InvoicesListPage/>} />
++          <Route path="/invoices/:id" element={<InvoiceViewerPage/>} />
++          <Route path="/marketplace" element={<ProgramsBrowsePage/>} />
++          <Route path="/marketplace/:id" element={<ProgramDetailPage/>} />
++          <Route path="/trainer/register" element={<TrainersRegisterPage/>} />
++          <Route path="/profile" element={<UserProfilePage/>} />
+           {/* ...your existing routes... */}
+         </Routes>

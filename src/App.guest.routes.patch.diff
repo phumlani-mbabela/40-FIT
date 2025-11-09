@@ -1,0 +1,10 @@
+
+*** a/src/App.js
+--- b/src/App.js
+@@
++import GuestActivatePage from './pages/GuestActivatePage';
+@@
+         <Routes>
++          <Route path="/guest/activate/:id" element={<GuestActivatePage/>} />
+           {/* existing routes… */}
+         </Routes>

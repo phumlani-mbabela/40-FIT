@@ -1,0 +1,49 @@
+
+*** a/src/App.js
+--- b/src/App.js
+@@
+-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
++import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
++import { persistQueryClient } from '@tanstack/react-query-persist-client';
++import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
++import SupabaseAuthBridge from './context/SupabaseAuthBridge';
++import AdminTenantsPage from './pages/AdminTenantsPage';
++import AdminImportsPage from './pages/AdminImportsPage';
++import ProgramEditorPage from './pages/ProgramEditorPage';
++import EmailTemplatesPage from './pages/EmailTemplatesPage';
++import InvoiceViewerPage from './pages/InvoiceViewerPage';
++import TenantSwitcher from './components/TenantSwitcher';
+@@
+-const queryClient = new QueryClient();
++const queryClient = new QueryClient({ defaultOptions: { queries: { staleTime: 30000 }}});
++const persister = createSyncStoragePersister({ storage: window.localStorage });
++persistQueryClient({ queryClient, persister, maxAge: 1000*60*60*24 });
+@@
+-return (
+-  <QueryClientProvider client={queryClient}>
+-    <Router>
+-      <Routes>
+-        {/* your routes */}
+-      </Routes>
+-    </Router>
+-  </QueryClientProvider>
+-);
++return (
++  <QueryClientProvider client={queryClient}>
++    <SupabaseAuthBridge>
++      <Router>
++        <div className="container py-2">
++          <TenantSwitcher />
++        </div>
++        <Routes>
++          {/* your other routes */}
++          <Route path="/admin/tenants" element={<AdminTenantsPage/>} />
++          <Route path="/admin/imports" element={<AdminImportsPage/>} />
++          <Route path="/programs/new" element={<ProgramEditorPage/>} />
++          <Route path="/emails" element={<EmailTemplatesPage/>} />
++          <Route path="/invoices/:id" element={<InvoiceViewerPage/>} />
++        </Routes>
++      </Router>
++    </SupabaseAuthBridge>
++  </QueryClientProvider>
++);
