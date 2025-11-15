@@ -1,0 +1,28 @@
+﻿diff --git a/src/routes/AppRoutes.jsx b/src/routes/AppRoutes.jsx
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/src/routes/AppRoutes.jsx
+@@ -0,0 +1,200 @@
++import React from 'react';
++import { Routes, Route } from 'react-router-dom';
++import Dashboard from '../pages/Dashboard';
++import Profile from '../pages/Profile';
++import Invoices from '../pages/Invoices';
++import Programs from '../pages/Programs';
++import Subscriptions from '../pages/Subscriptions';
++import NotFound from '../pages/Notfound';
++
++export default function AppRoutes() {
++  return (
++    <Routes>
++      <Route path=\"/\" element={<Dashboard />} />
++      <Route path=\"/dashboard\" element={<Dashboard />} />
++      <Route path=\"/profile\" element={<Profile />} />
++      <Route path=\"/invoices\" element={<Invoices />} />
++      <Route path=\"/programs\" element={<Programs />} />
++      <Route path=\"/subscriptions\" element={<Subscriptions />} />
++      <Route path=\"*\" element={<NotFound />} />
++    </Routes>
++  );
++}

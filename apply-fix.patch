@@ -1,0 +1,8 @@
+*** Begin Patch
+*** Update File: src/index.js
+@@
+-import './assets/scss/main.scss';
++// Using compiled CSS to avoid loader issues during development.
++// If you prefer to use SCSS directly, remove this import and ensure sass/loader chain is fixed.
++import './assets/css/main-compiled.css';
+*** End Patch
