@@ -7,7 +7,6 @@ import Footer from "./../layouts/Footer";
 import Footer2 from "../layouts/Footer2";
 import ScrollToTop from "./../layouts/ScrollToTop";
 
-
 //Pages
 import Home from "./Home";
 import AboutUs from "./AboutUs";
@@ -33,19 +32,26 @@ import ContactUs from "./ContactUs";
 import Home2 from "./Home2";
 import Header2 from "../layouts/Header2";
 import Home3 from "./Home3";
-// import
-import Onboarding from "./Onboarding";
-
-import Onboarding2 from './Onboarding';
-import Login from './Login';
-import Signup from './Signup';
-import AuthCallback from './AuthCallback';
 import Home4 from './Home';
 
-// ADD THIS IMPORT
-import ProtectedRoute from '../auth/ProtectedRoute';
+import Programs  	from './Programs'  ;
+import Subscriptions from './Subscriptions';
+import Subscription  from './Subscription';
+/* Protected */
+import Dashboard 	from './Dashboard' ;
+import Invoices  	from './Invoices'  ;
+import Profile  	from './Profile'    ;
+import Onboarding 	from "./Onboarding";
+/* Auth */
+import Login  		from './Login'  ;
+import Signup 		from './Signup';
+import AuthCallback from './AuthCallback';
+import ProtectedRoute 	from '../auth/ProtectedRoute'; 		// adjust relative path
+import RedirectIfAuthed from '../routes/RedirectIfAuthed'; 	// adjust relative path
 
-import RedirectIfAuthed from '../routes/RedirectIfAuthed'; // adjust relative path
+
+// src/pages/Index.js (or wherever your routes live)
+import UserProfilePage from "./UserProfilePage";
 
 
 function Index() {
@@ -62,19 +68,24 @@ function Index() {
       <Routes>
 	  
 		{/* Public */}
-		
-	    //<Route path="/login" element={<Login />} />
-	    //<Route path="/signup" element={<Signup />} />
-		// In Index.js route config
-		
 		{/*<Route path="/login"  element={<RedirectIfAuthed><Login /></RedirectIfAuthed>} />
 		<Route path="/signup" element={<RedirectIfAuthed><Signup /></RedirectIfAuthed>} /> */}
 	    <Route path="/auth/callback" element={<AuthCallback />} />
 		<Route path="/login"  element={<RedirectIfAuthed to="/home-2"> <Login /> </RedirectIfAuthed>}/>
 		<Route path="/signup" element={<RedirectIfAuthed to="/home-2"> <Signup /> </RedirectIfAuthed>} />
-
-	    {/* Protect onboarding */}
+	    <Route path="/subscriptions" element={<Subscriptions />} />
+		
+		
+		{/* Protect - Should be available after logon. */}
 	    <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
+		<Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+		<Route path="/programs" element={<ProtectedRoute><Programs /></ProtectedRoute>} />
+		<Route path="/subscription" element={<ProtectedRoute><Subscription /></ProtectedRoute>} />
+		<Route path="/invoices" element={<ProtectedRoute><Invoices /></ProtectedRoute>} />
+		<Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+
+		{/* Wired to the Database. */}
+		<Route path="/profilee" element={<UserProfilePage />} />
 
         {/* Private */}		
 		{/*
@@ -92,6 +103,7 @@ function Index() {
         <Route path="/under-maintenance" exact element={<UnderConstruction />}/>
         <Route path="/appointment" exact element={<Appointment />} />
         <Route path="/coming-soon" exact element={<ComingSoon />} />
+		
         <Route element={<MainLayout />}>
           <Route path="/allservices" exact element={<ServicesFortyPlusFit />} />
           <Route path="/" exact element={<Home />} />
@@ -127,6 +139,7 @@ function Index() {
           />
           <Route path="/contact-us" exact element={<ContactUs />} />
         </Route>
+		
         <Route element={<MainLayout2 />}>
           <Route path="/home-2" exact element={<Home2 />} />
         </Route>
